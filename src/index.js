@@ -10,24 +10,34 @@ import {
   StyleSheet,
   Text,
   View,
-  Button
+  Button,
+  ActivityIndicator
 } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { increaseCounter, decreaseCounter } from './actions';
+import { showIndicator, hideIndicator } from './actions';
+
+import SimpleForm from './form';
 
 type Props = {};
 class App extends Component<Props> {
+
+  fakeOperation = () => {
+    this.props.showIndicator();
+    setTimeout(() => {
+      this.props.hideIndicator();
+    }, 5000);
+  }
+
+  componentDidMount(){
+    this.fakeOperation();
+  }
+
   render() {
-    const { counter, increaseCounter, decreaseCounter } = this.props;
     return (
       <View style={styles.container}>
-        <Button title="+" onPress={increaseCounter} />
-        <Text style={styles.instructions}>
-          {counter}
-        </Text>
-        <Button title="-" onPress={decreaseCounter} />
+        <Text>Hello</Text>H
       </View>
     );
   }
@@ -55,8 +65,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    increaseCounter: bindActionCreators(increaseCounter, dispatch),
-    decreaseCounter: bindActionCreators(decreaseCounter, dispatch)
+    showIndicator: bindActionCreators(showIndicator, dispatch),
+    hideIndicator: bindActionCreators(hideIndicator, dispatch)
   }
 }
 
