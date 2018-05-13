@@ -1,4 +1,4 @@
-import { ADD_COUNTER, MINUS_COUNTER, SHOW_INDICATOR, HIDE_INDICATOR } from './types';
+import { ADD_COUNTER, MINUS_COUNTER, SHOW_INDICATOR, HIDE_INDICATOR, SHOW_ALERT, HIDE_ALERT } from './types';
 
 export const increaseCounter = () => {
   return {
@@ -24,5 +24,20 @@ export const showIndicator = () => {
 export const hideIndicator = () => {
   return {
     type: HIDE_INDICATOR
+  }
+}
+
+export const showAlert = (message) => {
+  const {type, title, body} = message;
+  return {
+    type: SHOW_ALERT,
+    payload: {type, title, body}
+  }
+}
+
+
+export const hideAlert = () => {
+  return {
+    type: HIDE_ALERT
   }
 }

@@ -16,7 +16,7 @@ import {
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { showIndicator, hideIndicator } from './actions';
+import { showIndicator, hideIndicator, showAlert } from './actions';
 
 import SimpleForm from './form';
 
@@ -31,13 +31,20 @@ class App extends Component<Props> {
   }
 
   componentDidMount(){
-    this.fakeOperation();
+    // this.fakeOperation();
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello</Text>H
+        <Text>Hello</Text>
+        <Button title="No Network" onPress={()=>{
+          this.props.showAlert({
+            type: 'warn',
+            title: 'Waning Title',
+            body: 'Redux Warning message'
+          })
+          }} />
       </View>
     );
   }
@@ -66,7 +73,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return {
     showIndicator: bindActionCreators(showIndicator, dispatch),
-    hideIndicator: bindActionCreators(hideIndicator, dispatch)
+    hideIndicator: bindActionCreators(hideIndicator, dispatch),
+    showAlert: bindActionCreators(showAlert, dispatch)
   }
 }
 
