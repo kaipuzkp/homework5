@@ -18,6 +18,8 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { showIndicator, hideIndicator, showAlert } from './actions';
 
+
+
 import SimpleForm from './form';
 
 type Props = {};
@@ -33,18 +35,28 @@ class App extends Component<Props> {
   componentDidMount(){
     // this.fakeOperation();
   }
+    static navigationOptions = {
+        title: 'Login',
+    };
 
   render() {
+
     return (
       <View style={styles.container}>
-        <Text>Hello</Text>
-        <Button title="No Network" onPress={()=>{
-          this.props.showAlert({
-            type: 'warn',
-            title: 'Waning Title',
-            body: 'Redux Warning message'
-          })
-          }} />
+
+        {/*<Text>Hello</Text>*/}
+        {/*<Button title="No Network" onPress={()=>{*/}
+          {/*this.props.showAlert({*/}
+            {/*type: 'warn',*/}
+            {/*title: 'Waning Title',*/}
+            {/*body: 'Redux Warning message'*/}
+          {/*})*/}
+          {/*}} />*/}
+          <SimpleForm />
+          <View style={styles.buttonView}>
+              <Button title='Cancel' onPress={()=>{}}/>
+              <Button title='Submit' onPress={()=>this.props.navigation.navigate("User")}/>
+          </View>
       </View>
     );
   }
@@ -57,11 +69,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    buttonView:{
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
+        marginRight:35,
+        width:200,
+    },
+  // instructions: {
+  //   textAlign: 'center',
+  //   color: '#333333',
+  //   marginBottom: 5,
+  // },
 });
 
 const mapStateToProps = state => {
