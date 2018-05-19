@@ -18,6 +18,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { showIndicator, hideIndicator, showAlert } from './actions';
 
+import {
+    StackNavigator,
+} from 'react-navigation';
+
+import Login from '../src/login/login';
+import User from '../src/user/user';
+// import Signup from './src/signup/signup';
+
+const AppNavigator = StackNavigator({
+    LoginScreen: {screen: Login},
+    UserScreen: {screen: User},
+    // SignupScreen: {screen: Signup},
+});
+
+
 
 
 import SimpleForm from './form';
@@ -35,29 +50,14 @@ class App extends Component<Props> {
   componentDidMount(){
     // this.fakeOperation();
   }
-    static navigationOptions = {
-        title: 'Login',
-    };
+    // static navigationOptions = {
+    //     title: 'Login',
+    // };
 
   render() {
 
     return (
-      <View style={styles.container}>
-
-        {/*<Text>Hello</Text>*/}
-        {/*<Button title="No Network" onPress={()=>{*/}
-          {/*this.props.showAlert({*/}
-            {/*type: 'warn',*/}
-            {/*title: 'Waning Title',*/}
-            {/*body: 'Redux Warning message'*/}
-          {/*})*/}
-          {/*}} />*/}
-          <SimpleForm />
-          <View style={styles.buttonView}>
-              <Button title='Cancel' onPress={()=>{}}/>
-              <Button title='Submit' onPress={()=>this.props.navigation.navigate("User")}/>
-          </View>
-      </View>
+      <AppNavigator/>
     );
   }
 }

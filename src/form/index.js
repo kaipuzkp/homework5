@@ -67,7 +67,7 @@ const SimpleForm = props => {
             </View>
             {/*<View style={styles.buttonView}>*/}
                 {/*<Button title='Cancel' onPress={()=>{}}/>*/}
-                {/*<Button title='Submit' onPress={()=>this.props.navigation.navigate("User")}/>*/}
+                {/*<Button title='Submit' onPress={()=>props.navigation.navigate("User")}/>*/}
             {/*</View>*/}
 
 
