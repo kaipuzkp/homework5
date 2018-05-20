@@ -40,8 +40,9 @@ const AppNavigator = createStackNavigator({
 
 import SimpleForm from './form';
 
-type Props = {};
-class App extends Component<Props> {
+// type Props = {};
+// class App extends Component<Props> {
+class App extends Component{  
 
   fakeOperation = () => {
     this.props.showIndicator();
