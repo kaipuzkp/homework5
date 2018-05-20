@@ -8,6 +8,7 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated’, ‘Module R
 import SimpleForm from '../form';
 
 export class Login extends Component {
+    
     static navigationOptions = {
         title: 'Login',
     };
@@ -17,19 +18,7 @@ export class Login extends Component {
         return (
             <View style={styles.container}>
 
-                {/*<Text>Hello</Text>*/}
-                {/*<Button title="No Network" onPress={()=>{*/}
-                {/*this.props.showAlert({*/}
-                {/*type: 'warn',*/}
-                {/*title: 'Waning Title',*/}
-                {/*body: 'Redux Warning message'*/}
-                {/*})*/}
-                {/*}} />*/}
                 <SimpleForm />
-                <View style={styles.buttonView}>
-                    <Button title='Cancel' onPress={()=>{}}/>
-                    <Button title='Submit' onPress={()=>this.props.navigation.navigate("User")}/>
-                </View>
             </View>
         );
     }

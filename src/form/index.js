@@ -2,14 +2,16 @@ import React from 'react';
 import {Text,View,TextInput,StyleSheet,Button} from 'react-native'
 import { Field, reduxForm,SubmissionError} from 'redux-form';
 
+import NavigateButton from '../NavigateButton';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { showAlert } from '../actions';
+// const { navigation } = this.props;
 
 
 
-
-
-
-const customInput = ({input: {onChange, ...restInput}}) => {
-    return <TextInput style={styles.field} onChangeText={onChange}{...restInput}/>
+const customInput = ({input: {onChange, ...restInput}, ...restProps}) => {
+    return <TextInput style={styles.field} onChangeText={onChange} {...restInput} {...restProps} />
 }
 const customInputPassword = ({input: {onChange, ...restInput}}) => {
     return <TextInput style={styles.field} onChangeText={onChange} secureTextEntry={true}{...restInput}/>
@@ -21,26 +23,7 @@ const minLength = min => value =>
 const SimpleForm = props => {
     const { handleSubmit, pristine, reset, submitting } = props;
 
-    // //Valid submit
-    // const sleep = ms => new Promise(resolve => setTimeout(resolve, ms))
-    // function _submit(values) {
-    //     return sleep(1000).then(() => {
-    //         // simulate server latency
-    //         if (!['nino'].includes(values.username)) {
-    //             throw new SubmissionError({
-    //                 username: 'User does not exist',
-    //                 _error: 'Login failed!'
-    //             })
-    //         } else if (values.password !== '123') {
-    //             throw new SubmissionError({
-    //                 password: 'Wrong password',
-    //                 _error: 'Login failed!'
-    //             })
-    //         } else {
-    //             window.alert(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
-    //         }
-    //     })
-    // }
+
 
     return (
         <View style={styles.view}>
@@ -53,7 +36,7 @@ const SimpleForm = props => {
                     style={styles.field}
                     name="username"
                     component={customInput}
-                    secureTextEntry={false}
+                    // secureTextEntry={false}
                     validate={[minLength(8)]}
                 ></Field>
             </View>
@@ -62,13 +45,24 @@ const SimpleForm = props => {
                 <Field
                     style={styles.field}
                     name="password"
-                    component={customInputPassword}
+                    component={customInput}
+                    secureTextEntry={true}
                 ></Field>
             </View>
-            {/*<View style={styles.buttonView}>*/}
-                {/*<Button title='Cancel' onPress={()=>{}}/>*/}
-                {/*<Button title='Submit' onPress={()=>props.navigation.navigate("User")}/>*/}
-            {/*</View>*/}
+            <View style={styles.buttonView}>
+                <Button title='Cancel' onPress={()=>{}}/>
+                <NavigateButton 
+                    title='Submit'
+                    target="UserScreen" 
+                    action={()=>{
+                        props.showAlert({
+                            type: 'warn',
+                            title: 'Waning Title',
+                            body: 'Redux Warning message'
+                            })
+                    }}
+                />
+            </View>
 
 
 
@@ -114,7 +108,12 @@ const styles = StyleSheet.create({
     }
 
 });
-
-export default reduxForm({
+const mapDispatchToProps = (dispatch) => {
+    return {
+      showAlert: bindActionCreators(showAlert, dispatch)
+    }
+}
+  
+export default connect(null, mapDispatchToProps)(reduxForm({
     form: 'simple', // a unique identifier for this form
-})(SimpleForm);
+})(SimpleForm))

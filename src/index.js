@@ -19,17 +19,20 @@ import { bindActionCreators } from 'redux';
 import { showIndicator, hideIndicator, showAlert } from './actions';
 
 import {
-    StackNavigator,
+  createStackNavigator,
 } from 'react-navigation';
 
 import Login from '../src/login/login';
 import User from '../src/user/user';
 // import Signup from './src/signup/signup';
 
-const AppNavigator = StackNavigator({
-    LoginScreen: {screen: Login},
-    UserScreen: {screen: User},
+const AppNavigator = createStackNavigator({
+    LoginScreen: Login,
+    UserScreen:  User,
     // SignupScreen: {screen: Signup},
+},
+{
+  initialRouteName: 'LoginScreen',
 });
 
 
@@ -48,7 +51,7 @@ class App extends Component<Props> {
   }
 
   componentDidMount(){
-    // this.fakeOperation();
+    this.fakeOperation();
   }
     // static navigationOptions = {
     //     title: 'Login',
